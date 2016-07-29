@@ -24,7 +24,6 @@ missing
 **/*.o
 
 
-po/*
 !po/Makevars
 !po/POTFILES.in
 !po/LINGUAS

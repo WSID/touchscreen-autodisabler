@@ -5,10 +5,6 @@ BASEDIR=$(dirname $0)
 
 cd $BASEDIR
 
-echo "Running gettextize"
-gettextize --force --no-changelog || exit 1
-rm po/Makevars.template
-
 echo "Running aclocal"
 aclocal --install -I m4 || exit 1
 
