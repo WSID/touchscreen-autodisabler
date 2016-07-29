@@ -1,0 +1,5 @@
+<gresources>
+  <gresource prefix="/wsid/Tad">
+    <file preprocess="xml-stripblanks">wsid.Tad.dbus.xml</file>
+  </gresource>
+</gresources>

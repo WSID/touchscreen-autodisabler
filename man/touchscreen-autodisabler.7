@@ -1,0 +1,137 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "TOUCHSCREEN\-AUTODISABLER" "7" "July 2016" "0.9.7" "touchscreen-autodisabler"
+.
+.SH "NAME"
+\fBtouchscreen\-autodisabler\fR \- Automatically enables and disables touchscreen\.
+.
+.SH "SYNOPSIS"
+touchscreen\-autodisabler
+.
+.br
+touchscreen\-autodisabler {\-h, \-v}
+.
+.P
+systemctl \-\-user {start, stop, \.\.\.} touchscreen\-autodisabler[\.service]
+.
+.SH "DESCRIPTION"
+Automatically disables touchscreen by tablet stylus and eraser\'s proximity states\.
+.
+.SS "HOW IT RUNS\."
+This application gets events from X Server for the tablet\. When pen stylus come to tablet, X Server sent event that stylus\'s state has been changed\. If such is detected, this will grab touchscreen so that touch event would not be sent to any other X Clients\.
+.
+.P
+When pen gets out, this will ungrab touchscreen, so it can back to work\.
+.
+.SS "SINGLE INSTANCE"
+This is intended to be a \fBsingle instance\fR service\-like application\. When this application is running, it acquires name \fB"wsid\.Tad"\fR on DBus\. Also, it exposes \fImethonds and properties on there\fR\.
+.
+.P
+This application comes with a systemd user service file, systemctl(1) can start and stop it, and even automatically run at the start\.
+.
+.IP "" 4
+.
+.nf
+
+    systemctl \-\-user start touchscreen\-autodisabler
+    # Starts touchscreen autodisabler
+
+    systemctl \-\-user enable touchscreen\-autodisabler
+    # Make systemd automatically start touchscreen autodisabler
+.
+.fi
+.
+.IP "" 0
+.
+.SH "OPTIONS"
+There are nothing much about commandline options, as many options have been replaced by GSettings and DBus\.
+.
+.TP
+\-h, \-\-help
+Prints brief help for touchscreen\-autodisabler\. Nothing much on there though\.\.\. :(
+.
+.TP
+\-v, \-\-version
+Prins version of touchscreen\-autodisabler\.
+.
+.SH "GSETTINGS"
+This application relies on GSettings to store options\. You may edit settings by gsettings(1) or dconf\-editor(1)\. For device names, both of xinput id and actual name are acceptable\. When device list is empty, this will try to get all of appropriate devices
+.
+.SS "SCHEMA wsid\.Tad @ /wsid/Tad"
+.
+.TP
+watch: \fBas\fR
+Devices to be watched\. Tablet stylus and eraser devices to notify proximity state change\.
+.
+.TP
+control: \fBas\fR
+Devices to be controlled\. Touchscreen devices to be enabled and disabled\.
+.
+.TP
+transition: \fBs\fR = {"default", "clear\-to\-enable"}
+State transition mode\. Determines how internal state transit, and enable/disables devices\.
+.
+.IP
+"default" : Simple state transition\. Disable on come, Enable on gone\.
+.
+.IP
+"clear\-to\-enable": Delay touchscreen enabling, until touching is cleared\. Hand may remain on the touchscreen after pen is removed\. This mode will prevent unintended touch event in such case\.
+.
+.SH "DBUS INTERFACE"
+This application exposes its state and methods through DBus\.
+.
+.SS "INTERFACE wsid\.Tad @ OBJECT /wsid/Tad"
+.
+.TP
+\fIproperty\fR State: \fBu\fR (read)
+State of this application\. Each value means\.
+.
+.br
+0: Neutural state\.
+.
+.br
+1: Pen state\.
+.
+.br
+2: Rest Pen state\. (Hand is resting on the touchscreen\.)
+.
+.br
+3: Rest Still state\. (Pen is out but hand is still resting\.)
+.
+.br
+4: Touching state\. (Touchscreen is in use)
+.
+.TP
+\fIproperty\fR ControlEnabled: \fBb\fR (read)
+Controlled devices are enabled or not\.
+.
+.TP
+\fImethod\fR ResetState (): () => ()
+Resets its state into neutural state\.
+.
+.TP
+\fImethod\fR Quit (): () => ()
+Quits touchscreen autodisabler
+.
+.TP
+\fIsignal\fR Transit: => (u, u, b)
+stimulus: u: A Event\.
+.
+.br
+state: u: New state\.
+.
+.br
+control\-enabled: b: Whether controlled devices should be enabled\.
+.
+.br
+Emitted when its state is changed\.
+.
+.SH "SEE ALSO"
+xinput (1)
+.
+.SH "COPYRIGHT"
+Copyright 2014\-2016, WSID
+.
+.SH "AUTHOR"
+WSID \fIjongsome@gmail\.com\fR \fIhttp://wsidre\.egloos\.com\fR

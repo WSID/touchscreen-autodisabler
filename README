@@ -1,0 +1,26 @@
+Touchscreen Autodisabler
+
+This is simple -like program that detects pen's proximity event and
+disable touchscreen.
+
+This comes with a systemd user service file. So you can launch this by,
+
+$> systemctl --user start touchscreen-autodisabler
+
+
+Options are stored on the GSettings at "/wsid/Tad" so you can adjust
+options with gsettings or dconf-editor.
+
+For empty list, this will gather devices of appropriate types, and list of
+them instead empty one.
+
+clear-to-enable can be specified as transition option. With this option,
+this will not enable touchscreen until all touching is removed. This will
+prevent touch event when hand is resting on the screen.
+
+
+This also exposes states and methods to DBus user session with name "wsid.Tad".
+
+For detailed usage, refer to the man file.
+
+ - WSID <jongsome@gmail.com>
