@@ -40,7 +40,6 @@ msgid "device %s is not found."
 msgstr "장치 %s를 찾지 못했어요."
 
 #: src/tad_device.c:577
-#, fuzzy
 msgid ""
 "None of devices are added. touchscreen-autodisabler won't work properly."
 msgstr ""
@@ -92,7 +91,6 @@ msgid "State Transition Mode"
 msgstr "상태 전환 모드"
 
 #: src/wsid.Tad.gschema.xml:33
-#, fuzzy
 msgid ""
 "Determines how internal state transit, and enable/disables devices. \"default"
 "\" : Simple state transition. Disable on come, Enable on gone. \"clear-to-"
