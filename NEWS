@@ -1,17 +1,19 @@
 0.9.7 Changes from 0.9.5
 
- * Exposes states and methods on DBus user session.
-    on name "wwsid.Tad"
- * Added systemd user service file.
+ * Exposes states and methods on DBus user session with name "wsid.Tad"
+ * Added systemd user service file to run touchscreen autodisabler as service.
  * Use GSettings to store settings.
- * Added Korean language support
+ * Prints used device lists.
+    This is for user who runs 'systemctl --user status touchscreen-autodisabler'
+ * Added gio dependency
+    For GApplication, GDBus, GSettings
 
  * Removed print feature.
     We can use DBus instead.
  * Removed daemonize feature.
-    We may use systemd to run this.
+    We may use systemd to run touchscreen autodisabler.
  * Removed lock file.
-    As this acquires a name on DBus, we can keep single instance without it.
+    As GApplication keeps single instance, we don't need to create lock file.
  * Removed watch, control commandline option.
     We can store these option on GSettings.
 
