@@ -1,0 +1,3 @@
+src/tad_app.c
+src/tad_device.c
+src/wsid.Tad.gschema.xml

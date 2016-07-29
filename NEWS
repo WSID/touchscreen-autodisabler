@@ -1,0 +1,27 @@
+0.9.7 Changes from 0.9.5
+
+ * Exposes states and methods on DBus user session.
+    on name "wwsid.Tad"
+ * Added systemd user service file.
+ * Use GSettings to store settings.
+ * Added Korean language support
+
+ * Removed print feature.
+    We can use DBus instead.
+ * Removed daemonize feature.
+    We may use systemd to run this.
+ * Removed lock file.
+    As this acquires a name on DBus, we can keep single instance without it.
+ * Removed watch, control commandline option.
+    We can store these option on GSettings.
+
+
+0.9.5 Changes from 0.9.0
+
+ * added feature: print
+	prints state change of this application into stdout.
+ * improved its internal structure.
+ * tide up include relation of application headers and system headers.
+
+ * Fixed that short options gets option are not recognized.
+ * Fixed that application does not ignore DISPLAY environment variables.

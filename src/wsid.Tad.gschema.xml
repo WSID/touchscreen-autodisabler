@@ -1,0 +1,44 @@
+<schemalist gettext-domain="touchscreen-autodisabler">
+
+  <enum id="wsid.Tad.Transition">
+    <value nick="default" value="0"/>
+    <value nick="clear-to-enable" value="1"/>
+  </enum>
+
+
+  <schema id="wsid.Tad" path="/wsid/Tad/">
+
+    <key name="watch" type="as">
+      <default>[]</default>
+
+      <summary>Devices to be watched</summary>
+      <description>
+        Tablet stylus and eraser devices to notify proximity state change.
+      </description>
+    </key>
+
+    <key name="control" type="as">
+      <default>[]</default>
+
+      <summary>Devices to be controlled</summary>
+      <description>
+        Touchscreen devices to be enabled and disabled.
+      </description>
+    </key>
+
+    <key name="transition" enum="wsid.Tad.Transition">
+      <default>"default"</default>
+
+      <summary>State Transition Mode</summary>
+      <description>
+        Determines how internal state transit, and enable/disables devices.
+
+        "default" : Simple state transition. Disable on come, Enable on gone.
+
+        "clear-to-enable": Delay touchscreen enabling, until touching is cleared.
+        Hand may remains on the touchscreen after pen is removed. This mode will
+        prevent unintended touch event in such case.
+      </description>
+    </key>
+  </schema>
+</schemalist>

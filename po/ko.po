@@ -1,0 +1,109 @@
+# Korean translations for touchscreen-autodisabler package
+# touchscreen-autodisabler 패키지에 대한 한국어 번역문.
+# Copyright (C) 2016 THE touchscreen-autodisabler'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the touchscreen-autodisabler package.
+# WSID <jongsome@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: touchscreen-autodisabler 0.9.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-29 11:00+0900\n"
+"PO-Revision-Date: 2016-07-27 20:21+0900\n"
+"Last-Translator: WSID <jongsome@gmail.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/tad_app.c:43
+msgid "Print version information"
+msgstr "버전 정보를 출력합니다."
+
+#: src/tad_device.c:288
+msgid "XInput Extension is not availiable!\n"
+msgstr "XInput 확장을 쓸 수 없어요.\n"
+
+#: src/tad_device.c:392
+msgid "0 is invalid device id."
+msgstr "0은 유효한 장치 ID가 아니에요."
+
+#: src/tad_device.c:397
+#, c-format
+msgid "Device ID out of bound: %d / %d"
+msgstr "범위를 넘어간 장치 ID: %d / %d"
+
+#: src/tad_device.c:432
+#, c-format
+msgid "device %s is not found."
+msgstr "장치 %s를 찾지 못했어요."
+
+#: src/tad_device.c:577
+#, fuzzy
+msgid ""
+"None of devices are added. touchscreen-autodisabler won't work properly."
+msgstr ""
+"어떤 장치도 찾지 못했어요. touchscreen-autodisabler는 잘 작동하지 않을 거에"
+"요."
+
+#: src/tad_device.c:584
+#, c-format
+msgid ""
+"It seems that devices of type %s doesn't be detected. How about setting "
+"device list directly?"
+msgstr ""
+"%s 종류의 장치들을 찾지 못했어요. 장치 목록을 직접 설정해보는 것이 어때요?"
+
+#: src/tad_device.c:603
+msgid "  Watched Devices"
+msgstr "  감시되는 장치들"
+
+#: src/tad_device.c:608
+msgid "  Controlled Devices"
+msgstr "  제어되는 장치들"
+
+#: src/tad_device.c:718 src/tad_device.c:743
+msgid "Updating Event Masks."
+msgstr "이벤트 마스크를 새로 고치는 중."
+
+#: src/tad_device.c:783
+msgid "Start Watching."
+msgstr "감시를 시작합니다."
+
+#: src/wsid.Tad.gschema.xml:14
+msgid "Devices to be watched"
+msgstr "감시되는 장치들"
+
+#: src/wsid.Tad.gschema.xml:15
+msgid "Tablet stylus and eraser devices to notify proximity state change."
+msgstr "근접 상태 변경을 알려줄 타블렛 스타일러스나 지우개입니다."
+
+#: src/wsid.Tad.gschema.xml:23
+msgid "Devices to be controlled"
+msgstr "제어되는 장치들"
+
+#: src/wsid.Tad.gschema.xml:24
+msgid "Touchscreen devices to be enabled and disabled."
+msgstr "활성화 그리고 비활성화 될 터치스크린입니다."
+
+#: src/wsid.Tad.gschema.xml:32
+msgid "State Transition Mode"
+msgstr "상태 전환 모드"
+
+#: src/wsid.Tad.gschema.xml:33
+#, fuzzy
+msgid ""
+"Determines how internal state transit, and enable/disables devices. \"default"
+"\" : Simple state transition. Disable on come, Enable on gone. \"clear-to-"
+"enable\": Delay touchscreen enabling, until touching is cleared. Hand may "
+"remains on the touchscreen after pen is removed. This mode will prevent "
+"unintended touch event in such case."
+msgstr ""
+"내부 상태가 어떻게 전환될지, 그리고 장치를 어떻게 활성화 그리고 비활성화 할"
+"지 설정해요.\n"
+"\n"
+"\"default\" : 간단한 상태 전환이에요. 들어오면 비활성화, 나가면 활성화해요.\n"
+"\n"
+"\"clear-to-enable\": 터치를 모두 뗄때까지 터치스크린 활성을 멈춰요. 펜이 나간"
+"이후에도 손을 계속 기댈 수 있는데, 이때 의도치 않은 터치 이벤트를 막아줘요."
