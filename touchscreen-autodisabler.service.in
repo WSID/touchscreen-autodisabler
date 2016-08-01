@@ -4,8 +4,8 @@ Description=Touchscreen autodisabler
 [Service]
 Type=idle
 BusName=wsid.Tad
-ExecStartPre=/usr/bin/sleep 2
-ExecStart=/usr/bin/touchscreen-autodisabler
+ExecStartPre=@SLEEP@ 2
+ExecStart=@bindir@/touchscreen-autodisabler
 
 [Install]
 WantedBy=default.target

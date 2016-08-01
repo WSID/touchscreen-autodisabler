@@ -19,7 +19,7 @@ dist_doc_DATA = \
 	INSTALL \
 	NEWS
 
-dist_service_DATA= \
+service_DATA= \
 	touchscreen-autodisabler.service
 
 
@@ -27,8 +27,17 @@ dist_service_DATA= \
 ##################
 
 EXTRA_DIST = \
+		touchscreen-autodisabler.service.in \
         config.rpath m4 ChangeLog
 
+
+# File Generation
+#################
+touchscreen-autodisabler.service: touchscreen-autodisabler.service.in
+	$(SED) \
+	    -e "s,[@]bindir[@],$(bindir),g" \
+	    -e "s,[@]SLEEP[@],$(SLEEP),g" \
+	    < $< > $@
 
 
 
