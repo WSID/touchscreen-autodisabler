@@ -1,3 +1,9 @@
+0.9.8 Changes from 0.9.7
+
+ * Check 'sleep' command in configure.
+    This is required to delay autostart.
+ * Make use of configure variables in service file.
+
 0.9.7 Changes from 0.9.5
 
  * Exposes states and methods on DBus user session with name "wsid.Tad"
