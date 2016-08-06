@@ -2,10 +2,7 @@
 
 SUBDIRS = po src man
 
-# Directory setup.
-##################
 
-servicedir=$(prefix)/lib/systemd/user/
 
 # Target setup
 ##############
@@ -19,15 +16,17 @@ dist_doc_DATA = \
 	INSTALL \
 	NEWS
 
-service_DATA= \
+if HAVE_SYSTEMD_USER_UNIT
+systemduserunit_DATA= \
 	touchscreen-autodisabler.service
 
+endif
 
 # Misc Files setup
 ##################
 
 EXTRA_DIST = \
-		touchscreen-autodisabler.service.in \
+	touchscreen-autodisabler.service.in \
         config.rpath m4 ChangeLog
 
 
@@ -49,3 +48,7 @@ uninstall-local:
 	-rm -r $(docdir)
 
 ACLOCAL_AMFLAGS = --install -I m4
+
+
+DISTCHECK_CONFIGURE_FLAGS = \
+	--with-systemd-user-unit-dir=$$dc_install_base/$(systemduserunitdir)

@@ -31,6 +31,39 @@ GLIB_GSETTINGS
 
 
 
+dnl Systemd ////////////////////////////////////////////////////////////////////
+
+AC_MSG_CHECKING([systemd user unit directory])
+AC_ARG_WITH([systemd-user-unit],
+            [AS_HELP_STRING([--with-systemd-user-unit],
+                            [Install systemd user service unit])],
+            [],
+            [with_systemd_user_unit="auto"])
+
+
+
+AS_CASE([$with_systemd_user_unit],
+        ["no"],
+        [],
+
+        ["yes"],
+        [PKG_CHECK_VAR([SYSTEMD_USER_UNIT_DIR], [systemd], [systemduserunitdir],
+                       [],
+                       [AC_MSG_ERROR([Systemd user unit is enabled but cannot find directory for it.])])],
+
+        ["auto"],
+        [PKG_CHECK_VAR([SYSTEMD_USER_UNIT_DIR], [systemd], [systemduserunitdir])],
+
+        [AC_MSG_ERROR([words from 3 are allowed: yes, no, auto])])
+
+
+AM_CONDITIONAL([HAVE_SYSTEMD_USER_UNIT], [test s$SYSTEMD_USER_UNIT_DIR != s""])
+AS_IF([test s$SYSTEMD_USER_UNIT_DIR != s""],
+      [AC_SUBST([systemduserunitdir], [$SYSTEMD_USER_UNIT_DIR])],
+      [SYSTEMD_USER_UNIT_DIR="no"])
+
+AC_MSG_RESULT([$SYSTEMD_USER_UNIT_DIR])
+
 dnl ronn ///////////////////////////////////////////////////////////////////////
 
 AC_CHECK_TOOL([RONN], [ronn], [:])
