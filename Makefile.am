@@ -41,7 +41,7 @@ touchscreen-autodisabler.service: touchscreen-autodisabler.service.in
 
 
 CLEANFILES= \
-    $(service_DATA)
+    $(systemduserunit_DATA) \
 
 # Remove doc directory on uninstall
 uninstall-local:
