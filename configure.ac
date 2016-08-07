@@ -30,6 +30,16 @@ dnl GSettings //////////////////////////////////////////////////////////////////
 GLIB_GSETTINGS
 
 
+dnl DBus ///////////////////////////////////////////////////////////////////////
+
+AC_MSG_CHECKING([dbus session bus service file directory])
+PKG_CHECK_VAR([DBUS_SESSION_BUS_SERVICES_DIR], [dbus-1], [session_bus_services_dir],
+              [], [AC_MSG_ERROR([DBus session services directory is not available])])
+
+AC_SUBST([dbussessionbusservicesdir], [$DBUS_SESSION_BUS_SERVICES_DIR])
+
+AC_MSG_RESULT([$DBUS_SESSION_BUS_SERVICES_DIR])
+
 
 dnl Systemd ////////////////////////////////////////////////////////////////////
 

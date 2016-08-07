@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=wsid.Tad
+Exec=@bindir@/touchscreen-autodisabler
+SystemdService=touchscreen-autodisabler.service

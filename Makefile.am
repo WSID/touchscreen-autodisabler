@@ -16,6 +16,10 @@ dist_doc_DATA = \
 	INSTALL \
 	NEWS
 
+
+dbussessionbusservices_DATA= \
+	wsid.Tad.service
+
 if HAVE_SYSTEMD_USER_UNIT
 systemduserunit_DATA= \
 	touchscreen-autodisabler.service
@@ -27,6 +31,7 @@ endif
 
 EXTRA_DIST = \
 	touchscreen-autodisabler.service.in \
+	wsid.Tad.service.in \
         config.rpath m4 ChangeLog
 
 
@@ -38,10 +43,16 @@ touchscreen-autodisabler.service: touchscreen-autodisabler.service.in
 	    -e "s,[@]SLEEP[@],$(SLEEP),g" \
 	    < $< > $@
 
+wsid.Tad.service: wsid.Tad.service.in
+	$(AM_V_GEN) $(SED) \
+	    -e "s,[@]bindir[@],$(bindir),g" \
+	    -e "s,[@]SLEEP[@],$(SLEEP),g" \
+	    < $< > $@
 
 
 CLEANFILES= \
     $(systemduserunit_DATA) \
+    $(dbussessionbusservices_DATA)
 
 # Remove doc directory on uninstall
 uninstall-local:
