@@ -33,7 +33,7 @@ EXTRA_DIST = \
 # File Generation
 #################
 touchscreen-autodisabler.service: touchscreen-autodisabler.service.in
-	$(SED) \
+	$(AM_V_GEN) $(SED) \
 	    -e "s,[@]bindir[@],$(bindir),g" \
 	    -e "s,[@]SLEEP[@],$(SLEEP),g" \
 	    < $< > $@
