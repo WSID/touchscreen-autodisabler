@@ -4,8 +4,8 @@ SUBDIRS = po src man
 
 
 
-# Target setup
-##############
+# Document files
+################
 
 dist_doc_DATA = \
 	README \
@@ -17,26 +17,53 @@ dist_doc_DATA = \
 	NEWS
 
 
-dbussessionbusservices_DATA= \
-	wsid.Tad.service
+# Service files
+###############
+
+dbussessionbusservices_DATA= wsid.Tad.service
 
 if HAVE_SYSTEMD_USER_UNIT
-systemduserunit_DATA= \
-	touchscreen-autodisabler.service
-
+systemduserunit_DATA= touchscreen-autodisabler.service
 endif
 
-# Misc Files setup
-##################
+
+
+
 
 EXTRA_DIST = \
 	touchscreen-autodisabler.service.in \
 	wsid.Tad.service.in \
-        config.rpath m4 ChangeLog
+        config.rpath m4
 
 
-# File Generation
-#################
+CLEANFILES= \
+    $(systemduserunit_DATA) \
+    $(dbussessionbusservices_DATA)
+
+
+ACLOCAL_AMFLAGS = --install -I m4
+
+
+# Add custom configure directory
+################################
+DISTCHECK_CONFIGURE_FLAGS = \
+	SYSTEMD_USER_UNIT_DIR=$$dc_install_base/lib/systemd/user/ \
+	DBUS_SESSION_BUS_SERVICES_DIR=$$dc_install_base/share/dbus-1/
+
+
+
+
+# Target Hooks
+##############
+uninstall-local:
+	-rm -r $(docdir)
+
+
+
+
+# Custom Rules
+##############
+
 touchscreen-autodisabler.service: touchscreen-autodisabler.service.in
 	$(AM_V_GEN) $(SED) \
 	    -e "s,[@]bindir[@],$(bindir),g" \
@@ -49,20 +76,3 @@ wsid.Tad.service: wsid.Tad.service.in
 	    -e "s,[@]SLEEP[@],$(SLEEP),g" \
 	    < $< > $@
 
-
-CLEANFILES= \
-    $(systemduserunit_DATA) \
-    $(dbussessionbusservices_DATA)
-
-# Remove doc directory on uninstall
-uninstall-local:
-	-rm -r $(docdir)
-
-ACLOCAL_AMFLAGS = --install -I m4
-
-
-# Add custom configure directory
-DISTCHECK_CONFIGURE_FLAGS = \
-	SYSTEMD_USER_UNIT_DIR=$$dc_install_base/lib/systemd/user/ \
-	DBUS_SESSION_BUS_SERVICES_DIR=$$dc_install_base/share/dbus-1/
-	
