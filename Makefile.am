@@ -61,5 +61,8 @@ uninstall-local:
 ACLOCAL_AMFLAGS = --install -I m4
 
 
+# Add custom configure directory
 DISTCHECK_CONFIGURE_FLAGS = \
-	--with-systemd-user-unit-dir=$$dc_install_base/$(systemduserunitdir)
+	SYSTEMD_USER_UNIT_DIR=$$dc_install_base/lib/systemd/user/ \
+	DBUS_SESSION_BUS_SERVICES_DIR=$$dc_install_base/share/dbus-1/
+	
