@@ -35,16 +35,6 @@
 #include "tad_app.h"
 
 
-/* constants ******************************************************************/
-static GOptionEntry entries[] = {
-	{ "version", 'v',
-	  G_OPTION_FLAG_NONE,
-	  G_OPTION_ARG_NONE, NULL,
-	  N_("Print version information"), NULL},
-	{NULL}
-};
-
-
 static GDBusNodeInfo *tad_dbus_info;
 static GDBusInterfaceInfo *tad_dbus_interface_info;
 
@@ -77,9 +67,6 @@ static void tad_application_startup (GApplication *application);
 
 static void tad_application_activate (GApplication *application);
 
-static gint tad_application_handle_local_options (GApplication *application,
-												  GVariantDict *options);
-
 static gboolean tad_application_dbus_register (GApplication     *application,
                                                GDBusConnection  *connection,
                                                const gchar      *object_path,
@@ -88,12 +75,6 @@ static gboolean tad_application_dbus_register (GApplication     *application,
 static void tad_application_dbus_unregister (GApplication    *application,
                                              GDBusConnection *connection,
                                              const gchar     *object_path);
-
-/* **** Callback Functions ****************************************************/
-
-static void tad_application_settings_changed (GSettings *settings,
-                                              gchar     *key,
-                                              gpointer   userdata);
 
 
 /* **** DBus Object Functions *************************************************/
@@ -118,6 +99,29 @@ static void tad_dbus_method_call (GDBusConnection       *connection,
 static void tad_dbus_transit (TadStateMachine *machine,
                               TadEvent         stimulus,
                               gpointer         userdata);
+
+
+/* **** Command line functions ************************************************/
+
+static gboolean tad_application_version (const gchar  *option,
+                                         const gchar  *value,
+                                         gpointer      data,
+                                         GError      **error);
+
+
+
+
+/* **** constants *************************************************************/
+static GOptionEntry entries[] = {
+	{ "version", 'v',
+	  G_OPTION_FLAG_NO_ARG,
+	  G_OPTION_ARG_CALLBACK, tad_application_version,
+	  N_("Print version information"), NULL},
+	{NULL}
+};
+
+
+
 
 
 /* **** GTypeInstance Functions Implementations *******************************/
@@ -145,8 +149,6 @@ tad_application_class_init (TadApplicationClass *c)
   c_g_application->startup = tad_application_startup;
   c_g_application->activate = tad_application_activate;
   c_g_application->shutdown = tad_application_shutdown;
-
-  c_g_application->handle_local_options = tad_application_handle_local_options;
 
   c_g_application->dbus_register = tad_application_dbus_register;
   c_g_application->dbus_unregister = tad_application_dbus_unregister;
@@ -239,28 +241,6 @@ tad_application_shutdown (GApplication *application)
   g_clear_object (& self->watcher);
   g_clear_object (& self->settings);
   G_APPLICATION_CLASS (tad_application_parent_class)->shutdown (application);
-}
-
-static gint
-tad_application_handle_local_options (GApplication *application,
-									  GVariantDict *options)
-{
-  gboolean version;
-
-  G_APPLICATION_CLASS (tad_application_parent_class)->
-      handle_local_options (application, options);
-
-  // Check for version
-  if (g_variant_dict_lookup (options, "version", "b", &version))
-	{
-	  if (version)
-		{
-          g_print ("touchscreen autodisabler " VERSION
-		           " - copyright wsid <jongsome@gmail.com>\n");
-          return 0;
-	    }
-	}
-	return -1;
 }
 
 static gboolean
@@ -375,6 +355,25 @@ tad_dbus_transit (TadStateMachine *machine,
   g_dbus_connection_emit_signal (conn, NULL, "/wsid/Tad", "wsid.Tad", "Transit",
 								 variant, NULL);
 }
+
+
+
+
+/* Command line functions *****************************************************/
+
+static gboolean
+tad_application_version (const gchar  *option,
+                         const gchar  *value,
+                         gpointer      data,
+                         GError      **error)
+{
+  g_print ("touchscreen autodisabler " VERSION
+           " - copyright wsid <jongsome@gmail.com>\n");
+
+  exit (0);
+  return TRUE;
+}
+
 
 /* Application Public functions ***********************************************/
 
