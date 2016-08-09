@@ -7,4 +7,6 @@ BusName=wsid.Tad
 ExecStartPre=@SLEEP@ 2
 ExecStart=@bindir@/touchscreen-autodisabler
 Restart=on-failure
-DBusService=wsid.Tad
+
+[Install]
+WantedBy=default.target

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(touchscreen-autodisabler, 0.9.8)
+AC_INIT(touchscreen-autodisabler, 0.9.9)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -28,17 +28,6 @@ AM_GNU_GETTEXT([external])
 dnl GSettings //////////////////////////////////////////////////////////////////
 
 GLIB_GSETTINGS
-
-
-dnl DBus ///////////////////////////////////////////////////////////////////////
-
-AC_MSG_CHECKING([dbus session bus service file directory])
-PKG_CHECK_VAR([DBUS_SESSION_BUS_SERVICES_DIR], [dbus-1], [session_bus_services_dir],
-              [], [AC_MSG_ERROR([DBus session services directory is not available])])
-
-AC_SUBST([dbussessionbusservicesdir], [$DBUS_SESSION_BUS_SERVICES_DIR])
-
-AC_MSG_RESULT([$DBUS_SESSION_BUS_SERVICES_DIR])
 
 
 dnl Systemd ////////////////////////////////////////////////////////////////////
