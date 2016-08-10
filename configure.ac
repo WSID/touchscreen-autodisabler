@@ -12,7 +12,7 @@ AM_SILENT_RULES([yes])
 AC_PROG_CC
 AC_PATH_XTRA
 
-dnl sleep - for delaying autostarting of 
+dnl sleep - for delaying autostarting of
 AC_PATH_PROG([SLEEP], [sleep])
 AC_SUBST([SLEEP])
 
@@ -25,9 +25,13 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [GETTEXT Package name])
 AM_GNU_GETTEXT([external])
 
 
-dnl GSettings //////////////////////////////////////////////////////////////////
+dnl GLib ///////////////////////////////////////////////////////////////////////
+AM_PATH_GLIB_2_0()
 
+
+dnl GSettings //////////////////////////////////////////////////////////////////
 GLIB_GSETTINGS
+
 
 
 dnl Systemd ////////////////////////////////////////////////////////////////////
