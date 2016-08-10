@@ -65,7 +65,7 @@ tad_enumtypes.c: tad_enumtypes.c.template tad_def.h
 	&& mv tad_enumtypes.c.tmp tad_enumtypes.c
 
 tad_enumtypes.h: tad_enumtypes.h.template tad_def.h
-	$(AM_V_GEN) glib-mkenums --template tad_enumtypes.h.template tad_def.h > tad_enumtypes.h \
+	$(AM_V_GEN) glib-mkenums --template tad_enumtypes.h.template tad_def.h > tad_enumtypes.h.tmp \
 	&& mv tad_enumtypes.h.tmp tad_enumtypes.h
 
 wsid.Tad.gresources.c: wsid.Tad.gresources.xml wsid.Tad.dbus.xml
