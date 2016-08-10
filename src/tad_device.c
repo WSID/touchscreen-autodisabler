@@ -430,8 +430,8 @@ tad_watcher_get_devices (TadWatcher    *self,
 
 	  if (device == NULL)
 		g_warning (_("device %s is not found."), names[i]);
-
-	  g_ptr_array_add (result, device);
+	  else
+	    g_ptr_array_add (result, device);
 	}
 
   if (length != NULL) *length = result->len;
