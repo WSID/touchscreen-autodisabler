@@ -19,7 +19,7 @@ AC_SUBST([SLEEP])
 dnl ***************************************************************************
 dnl Internationalization
 dnl ***************************************************************************
-GETTEXT_PACKAGE=PACKAGE
+GETTEXT_PACKAGE=$PACKAGE
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [GETTEXT Package name])
 AM_GNU_GETTEXT([external])
