@@ -43,6 +43,8 @@ int main (int argc, char *argv[])
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
+  textdomain (GETTEXT_PACKAGE);
+
   app = tad_application_new ();
   result = g_application_run (G_APPLICATION (app), argc, argv);
 
