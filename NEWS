@@ -1,3 +1,10 @@
+0.9.9 Changes from 0.9.8
+
+ * Added --with-systemd-user-unit option.
+    Also variable SYSTEMD_USER_UNIT_DIR can be set, if systemd unit should be
+        installed on other location.
+ * Fixed command line option help is not translated.
+
 0.9.8 Changes from 0.9.7
 
  * Check 'sleep' command in configure.
