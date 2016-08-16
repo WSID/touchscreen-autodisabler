@@ -4,6 +4,7 @@
     Also variable SYSTEMD_USER_UNIT_DIR can be set, if systemd unit should be
         installed on other location.
  * Fixed command line option help is not translated.
+ * Fixed crash when user put non-existing device name.
 
 0.9.8 Changes from 0.9.7
 
